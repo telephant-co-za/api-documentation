@@ -9,7 +9,7 @@ phases:
       - npm install redoc-cli -g
   build:
     commands:
-      - redoc-cli bundle http://petstore.swagger.io/v2/swagger.json
+      - redoc-cli bundle http://petstore.swagger.io/v2/swagger.json --output index.html
 artifacts:
   files:
     - redoc.html
