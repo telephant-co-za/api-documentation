@@ -12,4 +12,4 @@ phases:
       - redoc-cli bundle http://petstore.swagger.io/v2/swagger.json
 artifacts:
   files:
-    - redoc-static.html
+    - index.html
