@@ -9,7 +9,7 @@ phases:
       - npm install redoc-cli -g
   build:
     commands:
-      - redoc-cli bundle petstore.yml --output index.html
+      - redoc-cli bundle petstore.yml --options.theme.colors.primary.main=orange --output index.html
 artifacts:
   files:
     - index.html
