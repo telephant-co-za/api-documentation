@@ -14,7 +14,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
   x-logo:
-    url: "http://www.telephantcloud.co.za.s3-website-eu-west-1.amazonaws.com/assets/images/site-logo.svg",
+    url: "http://www.telephantcloud.co.za.s3-website-eu-west-1.amazonaws.com/assets/images/site-logo.svg"
     backgroundColor: "#ed6524"
 host: "petstore.swagger.io"
 basePath: "/v2"
