@@ -9,8 +9,9 @@ phases:
       - npm install redoc-cli -g
   build:
     commands:
-      - redoc-cli bundle http://petstore.swagger.io/v2/swagger.json --output index.html
+      - redoc-cli bundle petstore.yml --output index.html
 artifacts:
   files:
     - index.html
+    - petsore.yml
   discard-paths: yes
