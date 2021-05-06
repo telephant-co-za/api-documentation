@@ -12,7 +12,7 @@ It will install node and some other dependencies on that little virtual machine.
 
 Finally it will run this command:  
 
-```redoc-cli bundle http://petstore.swagger.io/v2/swagger.json --output index.html```
+```redoc-cli bundle petstore.yml --output index.html```
 
 This will build a ReDoc interface with the swagger.json file
 
