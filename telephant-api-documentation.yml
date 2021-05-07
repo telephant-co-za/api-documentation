@@ -1,5 +1,8 @@
 openapi: 3.0.0
 info:
+  x-logo:
+    url: "http://developer.telephant.co.za/telephant-documentation-logo.png"
+    backgroundColor: "#ed6524"
   title: Telephant API
   description: >-
     HTTP is the backbone of the Telephant API. Our API is RESTful in nature. It has resource URLs that are predictable. To indicate errors, it returns HTTP response codes. It also accepts JSON in the HTTP body and returns it. To use Rebilly's API, you can use one of our SDKs or your preferred HTTP/REST library for your programming language (currently available in PHP and Javascript).

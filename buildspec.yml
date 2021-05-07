@@ -13,5 +13,5 @@ phases:
 artifacts:
   files:
     - index.html
-    - petstore.yml
+    - telephant-api-documentation.yml
   discard-paths: yes
