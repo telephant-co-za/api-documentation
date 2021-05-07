@@ -20,7 +20,7 @@ info:
     ## Errors
 
 
-    Telephant uses the RFC 7807 error response format, also known as Problem Details for HTTP APIs. Your client must be prepared to gracefully manage these types of responses, just as it must with our standard normal API responses.
+    Telephant uses the RFC 7807 error response format, also known as Problem Details for HTTP APIs. Your client must be prepared to gracefully manage these types of responses, just as it must with our standard normal API responses.
 
 
     ### 400 Bad Request
@@ -93,7 +93,10 @@ info:
 
 
     This github repository contains installation and usage instructions. The docs folder contains SDK code examples.
-  contact: {}
+  contact:
+    name: Telephant API Team
+    url: http://developer.telephant.co.za
+    email: api@telephant.co.za
   version: '1.0'
 servers:
 - url: http://api.telephant.co.za
@@ -103,13 +106,21 @@ paths:
     get:
       tags:
       - Contacts
-      summary: /contacts
-      description: >-
-        You can list and create contacts on this path.
-
-
-        You will need to be authenticated to access the contacts path.  Information returned is related to the authenticated account.Retrieve a list of contacts associated to your account.
-      operationId: /contacts
+      summary: List all contacts
+      description: Retrieve a list of contacts associated with the account.
+      operationId: Listallcontacts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Contacts
+      summary: Create a contact
+      description: Create a new contact against this account.
+      operationId: Createacontact
       parameters: []
       responses:
         '200':
@@ -120,25 +131,9 @@ paths:
     get:
       tags:
       - Contacts
-      summary: /contacts/{telephone_number}
-      description: >-
-        You can review, view and delete a sepcific contacts on this path.
-
-
-        The telephone number must conform with an international South African cellphone number format.  That is a valid South African number prefixed with the international dialing code of "+27" and dropping the leading zero and followed by a 9 digit number.
-
-
-        So for example: +27821111111.
-
-
-        Please review [this artice](https://en.wikipedia.org/wiki/Telephone_numbers_in_South_Africa) for more information.
-
-
-        The telphone number must be of a valid contact in the contacts list.
-
-
-        You will need to be authenticated to access the contacts path.  Information returned is related to the authenticated account.Retrieve a contact with specified identifier string.
-      operationId: /contacts/{telephone_number}
+      summary: Get a contacts details
+      description: Retrieve the details of a single contact.
+      operationId: Getacontactsdetails
       parameters:
       - name: telephone_number
         in: path
@@ -152,62 +147,52 @@ paths:
           description: ''
           headers: {}
       deprecated: false
-  /transactions [GET]:
+    delete:
+      tags:
+      - Contacts
+      summary: Delete a specific contact
+      description: Delete a specified contact from your account's contacts.
+      operationId: Deleteaspecificcontact
+      parameters:
+      - name: telephone_number
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+      - Contacts
+      summary: Update a specific contact
+      description: Update the details of a specified contact in your account's contacts.
+      operationId: Updateaspecificcontact
+      parameters:
+      - name: telephone_number
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /transactions:
     get:
       tags:
       - Transactions
-      summary: /transactions/{TransactionsID}
-      description: Retrieve a transaction with specified identifier string.
-      operationId: /transactions/{TransactionsID}
+      summary: List transactions
+      description: Retrieve a list of transactions related to the account.
+      operationId: Listtransactions
       parameters: []
-      responses:
-        '200':
-          description: ''
-          headers: {}
-      deprecated: false
-  /notifications [GET]:
-    get:
-      tags:
-      - Notifications
-      summary: /notifications/{NotificationsID}
-      description: Retrieve a notification with specified identifier string.
-      operationId: /notifications/{NotificationsID}
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          headers: {}
-      deprecated: false
-  /questions/{question_id}:
-    get:
-      tags:
-      - Notifications
-      summary: View a Questions Detail
-      description: >-
-        A Question object has the following attributes:
-
-
-        + question
-
-
-        + published_at - An ISO8601 date when the question was published.
-
-
-        + url
-
-
-        + choices - An array of Choice objects.
-      operationId: ViewaQuestionsDetail
-      parameters:
-      - name: question_id
-        in: path
-        description: ID of the Question in form of an integer
-        required: true
-        style: simple
-        schema:
-          type: number
-          format: double
-          example: 1
       responses:
         '200':
           description: ''
@@ -215,206 +200,100 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ViewaQuestionsDetailresponse'
-              example:
-                question: Favourite programming language?
-                published_at: 2014-11-11T08:40:51.620Z
-                url: /questions/1
-                choices:
-                - choice: Swift
-                  url: /questions/1/choices/1
-                  votes: 2048
-                - choice: Python
-                  url: /questions/1/choices/2
-                  votes: 1024
-                - choice: Objective-C
-                  url: /questions/1/choices/3
-                  votes: 512
-                - choice: Ruby
-                  url: /questions/1/choices/4
-                  votes: 256
+                $ref: '#/components/schemas/Listoftransactions'
       deprecated: false
-  /questions/{question_id}/choices/{choice_id}:
-    post:
-      tags:
-      - Notifications
-      summary: Vote on a Choice
-      description: This action allows you to vote on a question's choice.
-      operationId: VoteonaChoice
-      parameters:
-      - name: question_id
-        in: path
-        description: ID of the Question in form of an integer
-        required: true
-        style: simple
-        schema:
-          type: number
-          format: double
-          example: 1
-      - name: choice_id
-        in: path
-        description: ID of the Choice in form of an integer
-        required: true
-        style: simple
-        schema:
-          type: number
-          format: double
-          example: 1
-      responses:
-        '201':
-          description: ''
-          headers:
-            Location:
-              content:
-                text/plain:
-                  schema:
-                    type: string
-                  example: /questions/1
-          content: {}
-      deprecated: false
-  /questions:
+  /notifications:
     get:
       tags:
       - Notifications
-      summary: List All Questions
-      description: ''
-      operationId: ListAllQuestions
-      parameters:
-      - name: page
-        in: query
-        description: The page of questions to return
-        style: form
-        explode: true
-        schema:
-          type: number
-          format: double
-          example: 1
+      summary: List notifications
+      description: Retrieve a list of notifications related to the account.
+      operationId: Listnotifications
+      parameters: []
       responses:
         '200':
           description: ''
-          headers:
-            Link:
-              content:
-                text/plain:
-                  schema:
-                    type: string
-                  example: </questions?page=2>; rel="next"
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ListAllQuestionsresponse'
-                description: ''
-                example:
-                - question: Favourite programming language?
-                  published_at: 2014-11-11T08:40:51.620Z
-                  url: /questions/1
-                  choices:
-                  - choice: Swift
-                    url: /questions/1/choices/1
-                    votes: 2048
-                  - choice: Python
-                    url: /questions/1/choices/2
-                    votes: 1024
-                  - choice: Objective-C
-                    url: /questions/1/choices/3
-                    votes: 512
-                  - choice: Ruby
-                    url: /questions/1/choices/4
-                    votes: 256
-              example:
-              - question: Favourite programming language?
-                published_at: 2014-11-11T08:40:51.620Z
-                url: /questions/1
-                choices:
-                - choice: Swift
-                  url: /questions/1/choices/1
-                  votes: 2048
-                - choice: Python
-                  url: /questions/1/choices/2
-                  votes: 1024
-                - choice: Objective-C
-                  url: /questions/1/choices/3
-                  votes: 512
-                - choice: Ruby
-                  url: /questions/1/choices/4
-                  votes: 256
+          headers: {}
       deprecated: false
-    post:
+  /notifications/{NotificationID}:
+    get:
       tags:
       - Notifications
-      summary: Create a New Question
-      description: >-
-        You may create your own question using this action. It takes a JSON object containing a question and a collection of answers in the form of choices.
-
-
-        + question (string) - The question
-
-
-        + choices (array[string]) - A collection of choices.
-      operationId: CreateaNewQuestion
+      summary: Get a notifications details
+      description: Retrieve a list of notifications associated with the account.
+      operationId: Getanotificationsdetails
       parameters:
-      - name: page
-        in: query
-        description: The page of questions to return
-        style: form
-        explode: true
-        schema:
-          type: number
-          format: double
-          example: 1
-      requestBody:
+      - name: NotificationID
+        in: path
         description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateaNewQuestionrequest'
-            example:
-              question: Favourite programming language?
-              choices:
-              - Swift
-              - Python
-              - Objective-C
-              - Ruby
         required: true
+        style: simple
+        schema:
+          type: string
       responses:
-        '201':
+        '200':
           description: ''
-          headers:
-            Location:
-              content:
-                text/plain:
-                  schema:
-                    type: string
-                  example: /questions/2
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateaNewQuestionresponse'
-              example:
-                question: Favourite programming language?
-                published_at: 2014-11-11T08:40:51.620Z
-                url: /questions/2
-                choices:
-                - choice: Swift
-                  url: /questions/2/choices/1
-                  votes: 0
-                - choice: Python
-                  url: /questions/2/choices/2
-                  votes: 0
-                - choice: Objective-C
-                  url: /questions/2/choices/3
-                  votes: 0
-                - choice: Ruby
-                  url: /questions/2/choices/4
-                  votes: 0
+          headers: {}
       deprecated: false
   /:
     get:
-      summary: Retrieve the Entry Point
+      tags:
+      - Airtime
+      summary: Get account balance
+      description: Retrieve the airtime balance of the account.
+      operationId: Getaccountbalance
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /airtime/{ContactID}:
+    put:
+      tags:
+      - Airtime
+      summary: Send airtime credit
+      description: Send a request for airtime from a contact.
+      operationId: Sendairtimecredit
+      parameters:
+      - name: ContactID
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Airtime
+      summary: Request airtime credit
       description: This resource does not have any attributes. Instead it offers the initial API affordances in the form of the links in the JSON body.
-      operationId: RetrievetheEntryPoint
+      operationId: Requestairtimecredit
+      parameters:
+      - name: ContactID
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /ping:
+    get:
+      tags:
+      - Utility
+      summary: Ping
+      description: Test if the api is working.  You can use any HTTP method on this endpoint and it will return the same response.
+      operationId: Ping
       parameters: []
       responses:
         '200':
@@ -423,177 +302,36 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                example: >-
-                  {
-                      "questions_url": "/questions"
-                  }
-
-                  You can view your balance. Send and request airtime from a  verified contact.
-              example: >-
-                {
-                    "questions_url": "/questions"
-                }
-
-                You can view your balance. Send and request airtime from a  verified contact.
+                $ref: '#/components/schemas/Pong'
       deprecated: false
+      security: []
 components:
   schemas:
-    ViewaQuestionsDetailresponse:
-      title: ViewaQuestionsDetailresponse
+    Listoftransactions:
+      title: Listoftransactions
+      type: object
+      description: List of transactions
+    Pong:
+      title: Pong
       required:
-      - question
-      - published_at
-      - url
-      - choices
+      - message
       type: object
       properties:
-        question:
+        message:
           type: string
-        published_at:
-          type: string
-        url:
-          type: string
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Choice'
-          description: ''
+          description: This is the message the server will respond with.
+          example: Pong.
+      description: Respond to a ping call.
       example:
-        question: Favourite programming language?
-        published_at: 2014-11-11T08:40:51.620Z
-        url: /questions/1
-        choices:
-        - choice: Swift
-          url: /questions/1/choices/1
-          votes: 2048
-        - choice: Python
-          url: /questions/1/choices/2
-          votes: 1024
-        - choice: Objective-C
-          url: /questions/1/choices/3
-          votes: 512
-        - choice: Ruby
-          url: /questions/1/choices/4
-          votes: 256
-    Choice:
-      title: Choice
-      required:
-      - choice
-      - url
-      - votes
-      type: object
-      properties:
-        choice:
-          type: string
-        url:
-          type: string
-        votes:
-          type: integer
-          format: int32
-      example:
-        choice: Swift
-        url: /questions/1/choices/1
-        votes: 2048
-    ListAllQuestionsresponse:
-      title: ListAllQuestionsresponse
-      required:
-      - question
-      - published_at
-      - url
-      - choices
-      type: object
-      properties:
-        question:
-          type: string
-        published_at:
-          type: string
-        url:
-          type: string
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Choice'
-          description: ''
-      example:
-        question: Favourite programming language?
-        published_at: 2014-11-11T08:40:51.620Z
-        url: /questions/1
-        choices:
-        - choice: Swift
-          url: /questions/1/choices/1
-          votes: 2048
-        - choice: Python
-          url: /questions/1/choices/2
-          votes: 1024
-        - choice: Objective-C
-          url: /questions/1/choices/3
-          votes: 512
-        - choice: Ruby
-          url: /questions/1/choices/4
-          votes: 256
-    CreateaNewQuestionrequest:
-      title: CreateaNewQuestionrequest
-      required:
-      - question
-      - choices
-      type: object
-      properties:
-        question:
-          type: string
-        choices:
-          type: array
-          items:
-            type: string
-          description: ''
-      example:
-        question: Favourite programming language?
-        choices:
-        - Swift
-        - Python
-        - Objective-C
-        - Ruby
-    CreateaNewQuestionresponse:
-      title: CreateaNewQuestionresponse
-      required:
-      - question
-      - published_at
-      - url
-      - choices
-      type: object
-      properties:
-        question:
-          type: string
-        published_at:
-          type: string
-        url:
-          type: string
-        choices:
-          type: array
-          items:
-            $ref: '#/components/schemas/Choice'
-          description: ''
-      example:
-        question: Favourite programming language?
-        published_at: 2014-11-11T08:40:51.620Z
-        url: /questions/2
-        choices:
-        - choice: Swift
-          url: /questions/2/choices/1
-          votes: 0
-        - choice: Python
-          url: /questions/2/choices/2
-          votes: 0
-        - choice: Objective-C
-          url: /questions/2/choices/3
-          votes: 0
-        - choice: Ruby
-          url: /questions/2/choices/4
-          votes: 0
+        message: Pong.
 tags:
 - name: Contacts
   description: You can access and edit your contacts lists from your personal, company, and other accounts in Contacts. You can also add, update, and delete details about your contacts.  In order to request or send airtime you will need a verified contact.
 - name: Transactions
   description: ''
 - name: Notifications
+  description: ''
+- name: Airtime
+  description: ''
+- name: Utility
   description: ''
