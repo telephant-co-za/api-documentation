@@ -1,0 +1,596 @@
+openapi: 3.0.0
+info:
+  title: Telephant API
+  description: >-
+    HTTP is the backbone of the Telephant API. Our API is RESTful in nature. It has resource URLs that are predictable. To indicate errors, it returns HTTP response codes. It also accepts JSON in the HTTP body and returns it. To use Rebilly's API, you can use one of our SDKs or your preferred HTTP/REST library for your programming language (currently available in PHP and Javascript).
+
+
+    ## Authentication
+
+
+    You will get your secret API key when you sign up for an account. Additional API keys can be created, and API keys can be deleted (as you may need to rotate your keys in the future). By using your secret key in the request header, you can authenticate with the Telephant API.
+
+
+    Never share your secret keys. Keep them guarded and secure.
+
+
+    ## Errors
+
+
+    Telephant uses the RFC 7807 error response format, also known as Problem Details for HTTP APIs. Your client must be prepared to gracefully manage these types of responses, just as it must with our standard normal API responses.
+
+
+    ### 400 Bad Request
+
+
+    Due to an apparent client error, the server cannot or will not process the request (e.g., malformed request syntax, size too large, invalid request message framing, or deceptive request routing)
+
+
+    ### 401 Unauthorized
+
+
+    Authentication is required and has failed or has not yet been provided.
+
+
+    ### 402 Payment Required
+
+
+    Insufficient balance in your airtime account.
+
+
+    ### 403 Forbidden
+
+
+    The request was legitimate and the server acknowledged it, but the server is refusing to act. This may be because the user lacks the required permissions for a resource.  For example you are asking to delete a contact not associated to your account.
+
+
+    ### 404 Not Found
+
+
+    The requested resource was not identified, but it could be accessible later. The client is free to make additional requests.
+
+
+    ### 405 Method Not Allowed
+
+
+    A GET request on a form that needs data to be presented via POST, or a PUT request on a read-only resource, for example, is not supported for the requested resource.
+
+
+    ## SDKs
+
+
+    To communicate with the API, Telephant provides a Javascript SDK and a PHP SDK. The API, on the other hand, does not require the use of an SDK.
+
+
+    You can test our API with any HTTP we can recommend:
+
+
+    * Chrome Browser
+
+
+    * Firefox Browser
+
+
+    * WGET
+
+
+    * CURL
+
+
+    * Postman
+
+
+    ### Javascript SDK
+
+
+    This github repository contains installation and usage instructions. The docs folder contains SDK code examples.
+
+
+    ### PHP SDK
+
+
+    This github repository contains installation and usage instructions. The docs folder contains SDK code examples.
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://api.telephant.co.za
+  variables: {}
+paths:
+  /contacts:
+    get:
+      tags:
+      - Contacts
+      summary: /contacts
+      description: >-
+        You can list and create contacts on this path.
+
+
+        You will need to be authenticated to access the contacts path.  Information returned is related to the authenticated account.Retrieve a list of contacts associated to your account.
+      operationId: /contacts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /contacts/{telephone_number}:
+    get:
+      tags:
+      - Contacts
+      summary: /contacts/{telephone_number}
+      description: >-
+        You can review, view and delete a sepcific contacts on this path.
+
+
+        The telephone number must conform with an international South African cellphone number format.  That is a valid South African number prefixed with the international dialing code of "+27" and dropping the leading zero and followed by a 9 digit number.
+
+
+        So for example: +27821111111.
+
+
+        Please review [this artice](https://en.wikipedia.org/wiki/Telephone_numbers_in_South_Africa) for more information.
+
+
+        The telphone number must be of a valid contact in the contacts list.
+
+
+        You will need to be authenticated to access the contacts path.  Information returned is related to the authenticated account.Retrieve a contact with specified identifier string.
+      operationId: /contacts/{telephone_number}
+      parameters:
+      - name: telephone_number
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /transactions [GET]:
+    get:
+      tags:
+      - Transactions
+      summary: /transactions/{TransactionsID}
+      description: Retrieve a transaction with specified identifier string.
+      operationId: /transactions/{TransactionsID}
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /notifications [GET]:
+    get:
+      tags:
+      - Notifications
+      summary: /notifications/{NotificationsID}
+      description: Retrieve a notification with specified identifier string.
+      operationId: /notifications/{NotificationsID}
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /questions/{question_id}:
+    get:
+      tags:
+      - Notifications
+      summary: View a Questions Detail
+      description: >-
+        A Question object has the following attributes:
+
+
+        + question
+
+
+        + published_at - An ISO8601 date when the question was published.
+
+
+        + url
+
+
+        + choices - An array of Choice objects.
+      operationId: ViewaQuestionsDetail
+      parameters:
+      - name: question_id
+        in: path
+        description: ID of the Question in form of an integer
+        required: true
+        style: simple
+        schema:
+          type: number
+          format: double
+          example: 1
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewaQuestionsDetailresponse'
+              example:
+                question: Favourite programming language?
+                published_at: 2014-11-11T08:40:51.620Z
+                url: /questions/1
+                choices:
+                - choice: Swift
+                  url: /questions/1/choices/1
+                  votes: 2048
+                - choice: Python
+                  url: /questions/1/choices/2
+                  votes: 1024
+                - choice: Objective-C
+                  url: /questions/1/choices/3
+                  votes: 512
+                - choice: Ruby
+                  url: /questions/1/choices/4
+                  votes: 256
+      deprecated: false
+  /questions/{question_id}/choices/{choice_id}:
+    post:
+      tags:
+      - Notifications
+      summary: Vote on a Choice
+      description: This action allows you to vote on a question's choice.
+      operationId: VoteonaChoice
+      parameters:
+      - name: question_id
+        in: path
+        description: ID of the Question in form of an integer
+        required: true
+        style: simple
+        schema:
+          type: number
+          format: double
+          example: 1
+      - name: choice_id
+        in: path
+        description: ID of the Choice in form of an integer
+        required: true
+        style: simple
+        schema:
+          type: number
+          format: double
+          example: 1
+      responses:
+        '201':
+          description: ''
+          headers:
+            Location:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: /questions/1
+          content: {}
+      deprecated: false
+  /questions:
+    get:
+      tags:
+      - Notifications
+      summary: List All Questions
+      description: ''
+      operationId: ListAllQuestions
+      parameters:
+      - name: page
+        in: query
+        description: The page of questions to return
+        style: form
+        explode: true
+        schema:
+          type: number
+          format: double
+          example: 1
+      responses:
+        '200':
+          description: ''
+          headers:
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: </questions?page=2>; rel="next"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListAllQuestionsresponse'
+                description: ''
+                example:
+                - question: Favourite programming language?
+                  published_at: 2014-11-11T08:40:51.620Z
+                  url: /questions/1
+                  choices:
+                  - choice: Swift
+                    url: /questions/1/choices/1
+                    votes: 2048
+                  - choice: Python
+                    url: /questions/1/choices/2
+                    votes: 1024
+                  - choice: Objective-C
+                    url: /questions/1/choices/3
+                    votes: 512
+                  - choice: Ruby
+                    url: /questions/1/choices/4
+                    votes: 256
+              example:
+              - question: Favourite programming language?
+                published_at: 2014-11-11T08:40:51.620Z
+                url: /questions/1
+                choices:
+                - choice: Swift
+                  url: /questions/1/choices/1
+                  votes: 2048
+                - choice: Python
+                  url: /questions/1/choices/2
+                  votes: 1024
+                - choice: Objective-C
+                  url: /questions/1/choices/3
+                  votes: 512
+                - choice: Ruby
+                  url: /questions/1/choices/4
+                  votes: 256
+      deprecated: false
+    post:
+      tags:
+      - Notifications
+      summary: Create a New Question
+      description: >-
+        You may create your own question using this action. It takes a JSON object containing a question and a collection of answers in the form of choices.
+
+
+        + question (string) - The question
+
+
+        + choices (array[string]) - A collection of choices.
+      operationId: CreateaNewQuestion
+      parameters:
+      - name: page
+        in: query
+        description: The page of questions to return
+        style: form
+        explode: true
+        schema:
+          type: number
+          format: double
+          example: 1
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateaNewQuestionrequest'
+            example:
+              question: Favourite programming language?
+              choices:
+              - Swift
+              - Python
+              - Objective-C
+              - Ruby
+        required: true
+      responses:
+        '201':
+          description: ''
+          headers:
+            Location:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: /questions/2
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateaNewQuestionresponse'
+              example:
+                question: Favourite programming language?
+                published_at: 2014-11-11T08:40:51.620Z
+                url: /questions/2
+                choices:
+                - choice: Swift
+                  url: /questions/2/choices/1
+                  votes: 0
+                - choice: Python
+                  url: /questions/2/choices/2
+                  votes: 0
+                - choice: Objective-C
+                  url: /questions/2/choices/3
+                  votes: 0
+                - choice: Ruby
+                  url: /questions/2/choices/4
+                  votes: 0
+      deprecated: false
+  /:
+    get:
+      summary: Retrieve the Entry Point
+      description: This resource does not have any attributes. Instead it offers the initial API affordances in the form of the links in the JSON body.
+      operationId: RetrievetheEntryPoint
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+                example: >-
+                  {
+                      "questions_url": "/questions"
+                  }
+
+                  You can view your balance. Send and request airtime from a  verified contact.
+              example: >-
+                {
+                    "questions_url": "/questions"
+                }
+
+                You can view your balance. Send and request airtime from a  verified contact.
+      deprecated: false
+components:
+  schemas:
+    ViewaQuestionsDetailresponse:
+      title: ViewaQuestionsDetailresponse
+      required:
+      - question
+      - published_at
+      - url
+      - choices
+      type: object
+      properties:
+        question:
+          type: string
+        published_at:
+          type: string
+        url:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Choice'
+          description: ''
+      example:
+        question: Favourite programming language?
+        published_at: 2014-11-11T08:40:51.620Z
+        url: /questions/1
+        choices:
+        - choice: Swift
+          url: /questions/1/choices/1
+          votes: 2048
+        - choice: Python
+          url: /questions/1/choices/2
+          votes: 1024
+        - choice: Objective-C
+          url: /questions/1/choices/3
+          votes: 512
+        - choice: Ruby
+          url: /questions/1/choices/4
+          votes: 256
+    Choice:
+      title: Choice
+      required:
+      - choice
+      - url
+      - votes
+      type: object
+      properties:
+        choice:
+          type: string
+        url:
+          type: string
+        votes:
+          type: integer
+          format: int32
+      example:
+        choice: Swift
+        url: /questions/1/choices/1
+        votes: 2048
+    ListAllQuestionsresponse:
+      title: ListAllQuestionsresponse
+      required:
+      - question
+      - published_at
+      - url
+      - choices
+      type: object
+      properties:
+        question:
+          type: string
+        published_at:
+          type: string
+        url:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Choice'
+          description: ''
+      example:
+        question: Favourite programming language?
+        published_at: 2014-11-11T08:40:51.620Z
+        url: /questions/1
+        choices:
+        - choice: Swift
+          url: /questions/1/choices/1
+          votes: 2048
+        - choice: Python
+          url: /questions/1/choices/2
+          votes: 1024
+        - choice: Objective-C
+          url: /questions/1/choices/3
+          votes: 512
+        - choice: Ruby
+          url: /questions/1/choices/4
+          votes: 256
+    CreateaNewQuestionrequest:
+      title: CreateaNewQuestionrequest
+      required:
+      - question
+      - choices
+      type: object
+      properties:
+        question:
+          type: string
+        choices:
+          type: array
+          items:
+            type: string
+          description: ''
+      example:
+        question: Favourite programming language?
+        choices:
+        - Swift
+        - Python
+        - Objective-C
+        - Ruby
+    CreateaNewQuestionresponse:
+      title: CreateaNewQuestionresponse
+      required:
+      - question
+      - published_at
+      - url
+      - choices
+      type: object
+      properties:
+        question:
+          type: string
+        published_at:
+          type: string
+        url:
+          type: string
+        choices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Choice'
+          description: ''
+      example:
+        question: Favourite programming language?
+        published_at: 2014-11-11T08:40:51.620Z
+        url: /questions/2
+        choices:
+        - choice: Swift
+          url: /questions/2/choices/1
+          votes: 0
+        - choice: Python
+          url: /questions/2/choices/2
+          votes: 0
+        - choice: Objective-C
+          url: /questions/2/choices/3
+          votes: 0
+        - choice: Ruby
+          url: /questions/2/choices/4
+          votes: 0
+tags:
+- name: Contacts
+  description: You can access and edit your contacts lists from your personal, company, and other accounts in Contacts. You can also add, update, and delete details about your contacts.  In order to request or send airtime you will need a verified contact.
+- name: Transactions
+  description: ''
+- name: Notifications
+  description: ''
