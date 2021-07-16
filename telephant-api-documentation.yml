@@ -1,7 +1,14 @@
 openapi: 3.0.0
 info:
   version: '1.0'
+  x-logo:
+    url: "http://developer.telephant.co.za/telephant-documentation-logo.png"
+    backgroundColor: "#ed6524"
   title: Telephant API
+  contact:
+    name: Telephant API Team
+    url: http://developer.telephant.co.za
+    email: api@telephant.co.za
   description: >-
     Telephant’s APIs (Application Programming Interfaces) power its platform for
     exchanging airtime.
