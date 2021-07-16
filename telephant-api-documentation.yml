@@ -25,8 +25,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -53,8 +52,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     put:
@@ -89,8 +87,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     delete:
@@ -111,8 +108,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/airtime:
@@ -134,8 +130,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -148,8 +143,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/airtime/{ContactsPhoneNumber}:
@@ -178,8 +172,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -207,8 +200,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/contacts:
@@ -230,8 +222,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -252,8 +243,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/contacts/{ContactsPhoneNumber}:
@@ -282,8 +272,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     put:
@@ -311,8 +300,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     delete:
@@ -340,8 +328,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/notifications:
@@ -363,8 +350,6 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -385,8 +370,6 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/notifications/{NotificationID}:
@@ -415,8 +398,6 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -444,8 +425,6 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
         '5XX':
           $ref: '#/components/responses/ServerError'
     put:
@@ -473,8 +452,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /ping:
@@ -503,8 +481,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -525,8 +502,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/retailers/{RetailerID}:
@@ -555,8 +531,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     delete:
@@ -584,8 +559,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/transactions:
@@ -607,8 +581,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/transactions/{TransactionID}:
@@ -637,8 +610,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
   /v1/users:
@@ -750,8 +722,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     post:
@@ -772,8 +743,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
     put:
@@ -794,8 +764,7 @@ paths:
       responses:
         '401':
           $ref: '#/components/responses/Unauthorised'
-        '404':
-          $ref: '#/components/responses/NotFound'
+
         '5XX':
           $ref: '#/components/responses/ServerError'
 servers:
