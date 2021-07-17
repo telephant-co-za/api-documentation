@@ -8,8 +8,8 @@ phases:
     commands:
       - npm install redoc-cli -g
   build:
-    commands:
-      - redoc-cli bundle telephant-api-documentation.yml --output index.html
+    commands: 
+      - "redoc-cli bundle telephant-api-documentation.yml --options '{\"theme\":{\"colors\":{\"primary\":{\"main\":\"#EA6B27\"}},\"sidebar\":{\"background-color\":\"#FF0000\"}}}' --output index.html"
 artifacts:
   files:
     - index.html
