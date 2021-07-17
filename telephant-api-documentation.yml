@@ -2,8 +2,8 @@ openapi: 3.0.0
 info:
   version: '1.0'
   x-logo:
-    url: "http://developer.telephant.co.za/telephant-documentation-logo.jpg"
-    backgroundColor: "#ffffff"
+    url: "http://developer.telephant.co.za/telephant-documentation-logo.png"
+    backgroundColor: "#fafafa"
   title: Telephant API
   contact:
     name: Telephant API Team
