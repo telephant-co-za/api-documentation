@@ -8,6 +8,6 @@ The build and deployment process is continuously integrated and works as follows
 * Code Build will use the instructions in the *buildspec.yml* file to launch a mini linux docker container, which will install node and other dependencies on the docker instance.
 * Code Build will then run the following command on the docker instance:  ```redoc-cli bundle telephant-api-documentation.yml --options.theme.colors.primary.main=orange --output index.html```
 * The *telephant-api-documentation.yml* file will be used to create a ReDoc interface, which will output a non-dependent html file.
-* The theme parameter controls Redoc's appearance, and the x-image parameters in the yaml file have been used to integrate the Telephant logo, *telephant-documentation-logo.png*.
+* The theme parameter controls Redoc's appearance, and the x-image parameters in the yaml file have been used to integrate the Telephant logo, *telephant-documentation-logo.jpg*.
 * Finally, the created files are stored in an AWS S3 bucket.
 * The AWS Route 53 service associates the subdomain http://developer.telephant.co.za with the S3 bucket's index.html.
