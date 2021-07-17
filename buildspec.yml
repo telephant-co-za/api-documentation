@@ -14,5 +14,5 @@ artifacts:
   files:
     - index.html
     - telephant-api-documentation.yml
-    - telephant-documentation-logo.png
+    - telephant-documentation-logo.jpg
   discard-paths: yes
