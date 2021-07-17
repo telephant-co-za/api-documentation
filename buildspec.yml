@@ -9,7 +9,7 @@ phases:
       - npm install redoc-cli -g
   build:
     commands:
-      - 'redoc-cli bundle telephant-api-documentation.yml --options "{\"theme\":{\"colors\":{\"primary\":{\"main\":\"#EA6B27\"}},\"sidebar\":{\"background-color\":\"#FF0000\"},\"logo\":{\"gutter\":\"0px\",\"max-width\":\"417px\",\"max-height\":\"190px\"}}}" --output index.html'
+      - 'redoc-cli bundle telephant-api-documentation.yml --options "{\"theme\":{\"colors\":{\"primary\":{\"main\":\"#EA6B27\"}},\"sidebar\":{\"background-color\":\"#FF0000\"},\"logo\":{\"gutter\":\"0px\",\"max-width\":\"417px\",\"max-height\":\"190px\"}, \"right-bar\":{\"background-color\":\"#A9A9A9\"}}" --output index.html'
 artifacts:
   files:
     - index.html
