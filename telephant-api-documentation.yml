@@ -524,7 +524,7 @@ paths:
           content:
             application/json:
               examples:
-                Notifications-Get:
+                Notifcations-Get:
                   $ref: '#/components/examples/Notifications-Count'
         '4XX':
           $ref: '#/components/responses/4XX'
@@ -560,7 +560,7 @@ paths:
           content:
             application/json:
               examples:
-                Notifications-Get-Item:
+                Notifcations-Get:
                   $ref: '#/components/examples/Notifications-Get-Item'
         '4XX':
           $ref: '#/components/responses/4XX'
